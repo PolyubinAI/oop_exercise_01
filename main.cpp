@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <fstream>
 #define Pi  3.14159265
 
 using namespace std;
@@ -33,7 +34,7 @@ public:
         return 0;
     }
     void Print() {
-        cout << R_ << " " << phi_ << endl;
+        cout << "R=" << R_ << "  " << "phi=" << phi_ << endl;
     }
     friend Complex operator+(const Complex& first, const Complex& second);
     friend Complex operator- (const Complex& first, const Complex& second);
@@ -148,9 +149,23 @@ Complex conj(Complex& a) {
 }
 
 
-int main() {
+int main(int argc, char *argv[]) {
     double r1, phi1, r2, phi2;
-    cin >> r1 >> phi1 >> r2 >> phi2;
+    if(argc == 1) {
+        cout << "Введите два комлексных числа:" << endl;
+        cout << "r1 = ";
+        cin >> r1;
+        cout << "phi1 = ";
+        cin >> phi1;
+        cout << "r2 = ";
+        cin >> r2;
+        cout << "phi2 = ";
+        cin >> phi2;
+    }else{
+        ifstream file (argv[1]);
+        file >> r1 >> phi1 >> r2 >> phi2;
+        file.close();
+    }
     Complex a = Complex(r1 , phi1);
     Complex b = Complex(r2 , phi2);
     Complex res = Complex(0,0);
@@ -162,7 +177,9 @@ int main() {
     res.Print();
     res = a / b;
     res.Print();
-    cout << (int)(a<b) << endl;
+    if (a == b) { cout << "a = b\n"; }
+    else if (a > b) { cout << "a > b"; }
+    else { cout << "a < b"; }
     res = conj(a);
     res.Print();
 
