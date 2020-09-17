@@ -16,7 +16,7 @@ public:
         phi_ = phi;
     }
 
-    double Get_R()  {
+    double Get_R()  { // Геттеры и сеттеры
         return R_;
     }
 
@@ -36,7 +36,7 @@ public:
     void Print() {
         cout << "R=" << R_ << "  " << "phi=" << phi_ << endl;
     }
-    friend Complex operator+(const Complex& first, const Complex& second);
+    friend Complex operator+(const Complex& first, const Complex& second); // все перегруженные операторы делаются дружелюбными
     friend Complex operator- (const Complex& first, const Complex& second);
     friend Complex operator* (const Complex& first, const Complex& second);
     friend Complex operator/ (const Complex& first, const Complex& second);
@@ -51,18 +51,18 @@ public:
     {
     }
 };
-double sin_(double x){
+double sin_(double x){ // функция синуса для аргумента заданного в градусах
     double y;
     y = x * Pi / 180.0;
     return sin(y);
 }
 
-double cos_(double x) {
+double cos_(double x) { // // функция конуса для аргумента заданного в градусах
     double y;
     y = x * Pi / 180.0;
     return cos(y);
 }
-double argz_(double a , double b){
+double argz_(double a , double b){ // функция, возврашая угол "фи" комплексного числа, заданного в алгебраической форме
     if(a>0){
         return atan(b/a);
     }else{
@@ -76,7 +76,8 @@ double argz_(double a , double b){
 }
 // перегрузка операторов
 
-Complex operator+(const Complex& first, const Complex& second) {
+Complex operator+(const Complex& first, const Complex& second) { // в каждом операторе был выаолнен переход от тригонометрической формы
+    // комплексного числа к алгебраииеской и потом назад к тригонометрической
     double a1,a2,b1,b2,r0,phi0;
     a1 = first.R_*cos_(first.phi_);
     a2 = second.R_ * cos_(second.phi_);
@@ -178,8 +179,8 @@ int main(int argc, char *argv[]) {
     res = a / b;
     res.Print();
     if (a == b) { cout << "a = b\n"; }
-    else if (a > b) { cout << "a > b"; }
-    else { cout << "a < b"; }
+    else if (a > b) { cout << "a > b\n"; }
+    else { cout << "a < b\n"; }
     res = conj(a);
     res.Print();
 
